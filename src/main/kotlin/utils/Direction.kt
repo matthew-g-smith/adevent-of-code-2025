@@ -19,8 +19,10 @@ enum class Movement(val x: Long, val y: Long)
 operator fun Point.plus(direction: Direction) = Point(x + direction.x, y + direction.y)
 operator fun Point.plus(movement: Movement) = Point((x + movement.x).toInt(), (y + movement.y).toInt())
 
-fun <T> List<List<T>>.inGrid(value: T): Boolean {
-    return this.any{ row ->
-        value in row
-    }
+fun <T> List<List<T>>.inGrid(point: Point): Boolean {
+    return point.x in this[0].indices && point.y in this.indices
+}
+
+fun <T> List<List<T>>.getValue(point: Point): T {
+    return this[point.y][point.x]
 }
